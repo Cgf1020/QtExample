@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>font/SourceHanSans-Bold.otf</file>
+        <file>font/SourceHanSans-Regular.otf</file>
+    </qresource>
+</RCC>
