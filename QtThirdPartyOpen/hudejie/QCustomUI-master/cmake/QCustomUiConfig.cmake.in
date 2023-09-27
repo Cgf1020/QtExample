@@ -1,0 +1,4 @@
+@PACKAGE_INIT@
+
+include_directories(@includedir@)
+include(@installdir@/cmake/QCustomUiTargets.cmake)

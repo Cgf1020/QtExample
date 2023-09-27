@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/DrawerExample">
+        <file>Resources/Edit.svg</file>
+    </qresource>
+</RCC>
