@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+#include "Map/map.h"
 #include "WaveProgressBar/waveprogressbar.h"
 
 
@@ -22,11 +23,17 @@ public:
 
 
 private slots:
+    void on_map_btn_clicked();
+
     void on_WaveProgressBar_btn_clicked();
+
+
 
 private:
     void Init();
 
+
+    void CreateMap();
     void CreateWaveProgressBar();
 
 
@@ -35,7 +42,7 @@ private:
 private:
     Ui::Widget *ui;
 
-
+    Map*             _Map;
 
     WaveProgressBar* _WaveProgressBar;
 };

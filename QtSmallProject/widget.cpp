@@ -17,11 +17,17 @@ Widget::~Widget()
 
 void Widget::Init()
 {
+    CreateMap();
 
     CreateWaveProgressBar();
 
+}
 
+void Widget::CreateMap()
+{
+    _Map = new Map(this);
 
+    ui->map_page->layout()->addWidget(_Map);
 }
 
 void Widget::CreateWaveProgressBar()
@@ -31,9 +37,16 @@ void Widget::CreateWaveProgressBar()
     ui->WaveProgressBar_page->layout()->addWidget(_WaveProgressBar);
 }
 
+void Widget::on_map_btn_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
 
 void Widget::on_WaveProgressBar_btn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
 }
+
+
+
 

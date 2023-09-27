@@ -31,7 +31,7 @@
            </size>
           </property>
           <property name="text">
-           <string>PushButton</string>
+           <string>地图</string>
           </property>
          </widget>
         </item>
@@ -60,7 +60,9 @@
      </item>
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
-       <widget class="QWidget" name="map_page"/>
+       <widget class="QWidget" name="map_page">
+        <layout class="QGridLayout" name="gridLayout_3"/>
+       </widget>
        <widget class="QWidget" name="WaveProgressBar_page">
         <layout class="QGridLayout" name="gridLayout_2"/>
        </widget>

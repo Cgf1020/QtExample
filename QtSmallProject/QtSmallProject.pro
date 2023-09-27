@@ -19,6 +19,8 @@ FORMS += \
     widget.ui
 
 
+#包含 地图控件
+include ($$PWD/Map/Map.pri)
 #包含 WaveProgressBar控件
 include ($$PWD/WaveProgressBar/WaveProgressBar.pri)
 

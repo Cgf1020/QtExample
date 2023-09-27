@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>map_res/bmap_offline_api_v3.0_min.js</file>
+        <file>map_res/index.html</file>
+        <file>map_res/map_load.js</file>
+        <file>qwebchannel.js</file>
+        <file>map_res/qt_webChannel.js</file>
+    </qresource>
+</RCC>
