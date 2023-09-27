@@ -5,6 +5,7 @@
 
 #include "Map/map.h"
 #include "WaveProgressBar/waveprogressbar.h"
+#include "Thermometer/thermometer.h"
 
 
 
@@ -29,12 +30,15 @@ private slots:
 
 
 
+    void on_pushButton_clicked();
+
 private:
     void Init();
 
 
     void CreateMap();
     void CreateWaveProgressBar();
+    void CreateThermometer();
 
 
 
@@ -45,5 +49,7 @@ private:
     Map*             _Map;
 
     WaveProgressBar* _WaveProgressBar;
+
+    Thermometer*     _Thermometer;
 };
 #endif // WIDGET_H

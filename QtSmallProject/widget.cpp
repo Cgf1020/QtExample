@@ -21,6 +21,7 @@ void Widget::Init()
 
     CreateWaveProgressBar();
 
+    CreateThermometer();
 }
 
 void Widget::CreateMap()
@@ -37,6 +38,13 @@ void Widget::CreateWaveProgressBar()
     ui->WaveProgressBar_page->layout()->addWidget(_WaveProgressBar);
 }
 
+void Widget::CreateThermometer()
+{
+    _Thermometer = new Thermometer(this);
+    _Thermometer->setValue(25.5);
+    ui->thermometer_page->layout()->addWidget(_Thermometer);
+}
+
 void Widget::on_map_btn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
@@ -47,6 +55,8 @@ void Widget::on_WaveProgressBar_btn_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-
-
+void Widget::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
 
