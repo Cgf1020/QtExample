@@ -29,6 +29,52 @@
 
 
 
+## 2. 水波进度条控件
+
+> 绘图事件中完成的
+
+
+
+![screenshots](./ReadMe.assets/screenshots.gif)
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 3. 温度计
+
+> 绘图事件中完成的
+
+![image-20231008144122730](./ReadMe.assets/image-20231008144122730.png)
+
+
+
+
+
+
+
+## 4.电池
+
+> 绘图事件中完成的
+
+
+
+![battery](./ReadMe.assets/battery.gif)
+
+
+
+
+
+
+
 
 
 

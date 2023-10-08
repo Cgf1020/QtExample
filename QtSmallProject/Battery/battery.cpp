@@ -428,3 +428,9 @@ void Battery::setNormalColorEnd(const QColor &normalColorEnd)
     }
 }
 
+
+void Battery::on_horizontalSlider_valueChanged(int value)
+{
+    setValue(value);
+}
+

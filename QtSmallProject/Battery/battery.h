@@ -142,6 +142,8 @@ private slots:
 
 
 
+    void on_horizontalSlider_valueChanged(int value);
+
 private:
     double minValue;        //最小值
     double maxValue;        //最大值
