@@ -6,7 +6,8 @@
 #include "Map/map.h"
 #include "WaveProgressBar/waveprogressbar.h"
 #include "Thermometer/thermometer.h"
-
+#include "Curve/curve.h"
+#include "Battery/battery.h"
 
 
 
@@ -32,24 +33,50 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_2_clicked();
+
+
+    void on_Battery_btn_clicked();
+
 private:
     void Init();
 
-
+    void CreateCurve();
     void CreateMap();
     void CreateWaveProgressBar();
     void CreateThermometer();
-
+    void CreateBattery();
 
 
 
 private:
     Ui::Widget *ui;
 
-    Map*             _Map;
-
-    WaveProgressBar* _WaveProgressBar;
-
-    Thermometer*     _Thermometer;
+    Curve*              _Curve;
+    Map*                _Map;
+    WaveProgressBar*    _WaveProgressBar;
+    Thermometer*        _Thermometer;
+    Battery*            _Battery{NULL};           //电池
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif // WIDGET_H

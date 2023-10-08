@@ -22,6 +22,15 @@ void Widget::Init()
     CreateWaveProgressBar();
 
     CreateThermometer();
+
+    CreateCurve();
+}
+
+void Widget::CreateCurve()
+{
+    _Curve = new Curve("导线温度曲线图", this);
+
+    ui->curve_page->layout()->addWidget(_Curve);
 }
 
 void Widget::CreateMap()
@@ -45,6 +54,12 @@ void Widget::CreateThermometer()
     ui->thermometer_page->layout()->addWidget(_Thermometer);
 }
 
+void Widget::CreateBattery()
+{
+    _Battery = new Battery(this);
+    ui->Battery_page->layout()->addWidget(_Battery);
+}
+
 void Widget::on_map_btn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
@@ -58,5 +73,20 @@ void Widget::on_WaveProgressBar_btn_clicked()
 void Widget::on_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+}
+
+
+void Widget::on_pushButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->curve_page);
+}
+
+
+void Widget::on_Battery_btn_clicked()
+{
+    if(!_Battery)
+        CreateBattery();
+
+    ui->stackedWidget->setCurrentWidget(ui->Battery_page);
 }
 

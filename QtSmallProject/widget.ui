@@ -50,6 +50,20 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>曲线图</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="Battery_btn">
+          <property name="text">
+           <string>电池</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -75,6 +89,12 @@
        </widget>
        <widget class="QWidget" name="thermometer_page">
         <layout class="QGridLayout" name="gridLayout_4"/>
+       </widget>
+       <widget class="QWidget" name="curve_page">
+        <layout class="QGridLayout" name="gridLayout_5"/>
+       </widget>
+       <widget class="QWidget" name="Battery_page">
+        <layout class="QGridLayout" name="gridLayout_6"/>
        </widget>
       </widget>
      </item>

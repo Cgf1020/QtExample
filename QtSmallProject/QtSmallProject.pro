@@ -25,10 +25,10 @@ include ($$PWD/Map/Map.pri)
 include ($$PWD/WaveProgressBar/WaveProgressBar.pri)
 #包含 温度计控件
 include ($$PWD/Thermometer/Thermometer.pri)
-
-
-
-
+#包含 曲线图
+include ($$PWD/Curve/Curve.pri)
+#包含 电池图
+include ($$PWD/Battery/Battery.pri)
 
 
 #设置使用utf8

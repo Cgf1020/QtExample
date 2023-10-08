@@ -7,6 +7,9 @@
 
 
 
+/* 模仿一个水波动态展现的控件
+ *
+*/
 
 namespace Ui {
 class WaveProgressBar;
