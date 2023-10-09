@@ -8,6 +8,7 @@
 #include "Thermometer/thermometer.h"
 #include "Curve/curve.h"
 #include "Battery/battery.h"
+#include "Dashboard/dashboard.h"
 
 
 
@@ -29,14 +30,14 @@ private slots:
 
     void on_WaveProgressBar_btn_clicked();
 
-
-
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
 
 
     void on_Battery_btn_clicked();
+
+    void on_wendu_dashboard_btn_clicked();
 
 private:
     void Init();
@@ -46,6 +47,7 @@ private:
     void CreateWaveProgressBar();
     void CreateThermometer();
     void CreateBattery();
+    void CreateDashboard();
 
 
 
@@ -56,7 +58,8 @@ private:
     Map*                _Map;
     WaveProgressBar*    _WaveProgressBar;
     Thermometer*        _Thermometer;
-    Battery*            _Battery{NULL};           //电池
+    Battery*            _Battery{NULL};             //电池
+    Dashboard*          _Dashboard{NULL};           //温度仪表盘
 };
 
 

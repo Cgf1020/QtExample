@@ -135,14 +135,16 @@ protected:
     void drawBorder(QPainter *painter);
     void drawBg(QPainter *painter);
     void drawHead(QPainter *painter);
+    void drawBackText(QPainter *painter);
 
 private slots:
     void updateValue();
 
-
-
-
     void on_horizontalSlider_valueChanged(int value);
+
+private:
+    void InitForm();
+
 
 private:
     double minValue;        //最小值

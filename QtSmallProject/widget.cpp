@@ -60,6 +60,12 @@ void Widget::CreateBattery()
     ui->Battery_page->layout()->addWidget(_Battery);
 }
 
+void Widget::CreateDashboard()
+{
+    _Dashboard = new Dashboard("温度仪表盘", this);
+    ui->wndu_dashboard_page->layout()->addWidget(_Dashboard);
+}
+
 void Widget::on_map_btn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
@@ -88,5 +94,13 @@ void Widget::on_Battery_btn_clicked()
         CreateBattery();
 
     ui->stackedWidget->setCurrentWidget(ui->Battery_page);
+}
+
+void Widget::on_wendu_dashboard_btn_clicked()
+{
+    if(!_Dashboard)
+        CreateDashboard();
+
+    ui->stackedWidget->setCurrentWidget(ui->wndu_dashboard_page);
 }
 

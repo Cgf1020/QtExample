@@ -73,6 +73,34 @@
 
 
 
+> 其他的博客文档
+>
+> [QtWidget绘制电池控件_qt电池控件_神威难藏泪~的博客-CSDN博客](https://blog.csdn.net/Thinking777/article/details/128766542)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 5.增加仪表盘控件
+
+> 绘图事件中完成的
+
+![dashboard](./ReadMe.assets/dashboard.gif)
+
+
+
+
+
 
 
 

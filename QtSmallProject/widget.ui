@@ -64,6 +64,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="wendu_dashboard_btn">
+          <property name="text">
+           <string>温度仪表盘</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -95,6 +102,9 @@
        </widget>
        <widget class="QWidget" name="Battery_page">
         <layout class="QGridLayout" name="gridLayout_6"/>
+       </widget>
+       <widget class="QWidget" name="wndu_dashboard_page">
+        <layout class="QGridLayout" name="gridLayout_7"/>
        </widget>
       </widget>
      </item>

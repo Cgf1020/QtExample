@@ -60,8 +60,10 @@ void Battery::paintEvent(QPaintEvent *)
     drawBorder(&painter);
     //绘制背景
     drawBg(&painter);
-    //    绘制头部
+    //绘制头部
     drawHead(&painter);
+    //绘制文本
+    drawBackText(&painter);
 }
 
 void Battery::drawBorder(QPainter *painter)
@@ -132,6 +134,25 @@ void Battery::drawHead(QPainter *painter)
 
     painter->restore();
 }
+void Battery::drawBackText(QPainter *painter)
+{
+    //保存画家的当前状态
+    painter->save();
+    //字体设置
+    QFont font;
+    font.setFamily("Microsoft Yahei");
+    font.setPixelSize(24);
+    painter->setFont(font);
+    //电量文字
+    QString value=QString::number(currentValue)+QString("%");
+    //绘制文本
+    painter->drawText(batteryRect,Qt::AlignCenter,value);
+    //恢复画家保存的状态
+    painter->restore();
+}
+
+
+
 
 void Battery::updateValue()
 {
@@ -432,5 +453,16 @@ void Battery::setNormalColorEnd(const QColor &normalColorEnd)
 void Battery::on_horizontalSlider_valueChanged(int value)
 {
     setValue(value);
+}
+
+void Battery::InitForm()
+{
+//    connect(ui->horizontalSlider, &QSlider::valueChanged,
+//            this, &Battery::on_horizontalSlider_valueChanged);
+
+
+//    connect(ui->horizontalSlider, &QSlider::valueChanged, [=](int value){
+
+//    });
 }
 

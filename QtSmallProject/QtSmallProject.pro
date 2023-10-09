@@ -29,6 +29,9 @@ include ($$PWD/Thermometer/Thermometer.pri)
 include ($$PWD/Curve/Curve.pri)
 #包含 电池图
 include ($$PWD/Battery/Battery.pri)
+#包含 仪表盘
+include ($$PWD/Dashboard/Dashboard.pri)
+
 
 
 #设置使用utf8
