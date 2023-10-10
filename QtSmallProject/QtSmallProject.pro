@@ -32,6 +32,9 @@ include ($$PWD/Battery/Battery.pri)
 #包含 仪表盘
 include ($$PWD/Dashboard/Dashboard.pri)
 
+#包含 QCustomplot
+include ($$PWD/QCustomplot/QCustomplot.pri)
+
 
 
 #设置使用utf8

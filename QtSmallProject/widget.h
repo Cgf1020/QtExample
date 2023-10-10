@@ -10,6 +10,8 @@
 #include "Battery/battery.h"
 #include "Dashboard/dashboard.h"
 
+#include "QCustomplot/qcustomplotcurve.h"
+
 
 
 QT_BEGIN_NAMESPACE
@@ -39,6 +41,8 @@ private slots:
 
     void on_wendu_dashboard_btn_clicked();
 
+    void on_QCustomPlot_btn_clicked();
+
 private:
     void Init();
 
@@ -49,17 +53,22 @@ private:
     void CreateBattery();
     void CreateDashboard();
 
+    void CreateQCustomPlotCurve();
+
 
 
 private:
     Ui::Widget *ui;
 
-    Curve*              _Curve;
-    Map*                _Map;
-    WaveProgressBar*    _WaveProgressBar;
-    Thermometer*        _Thermometer;
+    Curve*              _curve{NULL};
+    Map*                _Map{NULL};
+    WaveProgressBar*    _WaveProgressBar{NULL};
+    Thermometer*        _Thermometer{NULL};
     Battery*            _Battery{NULL};             //电池
     Dashboard*          _Dashboard{NULL};           //温度仪表盘
+
+
+    QCustomPlotCurve*   _QCustomPlotCurve{NULL};
 };
 
 

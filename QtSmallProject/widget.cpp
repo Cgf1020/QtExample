@@ -17,20 +17,23 @@ Widget::~Widget()
 
 void Widget::Init()
 {
-    CreateMap();
+//    CreateMap();
 
-    CreateWaveProgressBar();
+//    CreateWaveProgressBar();
 
-    CreateThermometer();
+//    CreateThermometer();
 
-    CreateCurve();
+//    CreateCurve();
 }
 
 void Widget::CreateCurve()
 {
-    _Curve = new Curve("导线温度曲线图", this);
+    _curve = new Curve(this);
 
-    ui->curve_page->layout()->addWidget(_Curve);
+    _curve->addSpline("随机测试曲线");
+
+
+    ui->curve_page->layout()->addWidget(_curve);
 }
 
 void Widget::CreateMap()
@@ -66,24 +69,46 @@ void Widget::CreateDashboard()
     ui->wndu_dashboard_page->layout()->addWidget(_Dashboard);
 }
 
+void Widget::CreateQCustomPlotCurve()
+{
+    _QCustomPlotCurve = new QCustomPlotCurve(this);
+    ui->QCustomPlot_page->layout()->addWidget(_QCustomPlotCurve);
+}
+
 void Widget::on_map_btn_clicked()
 {
+    if(!_Map)
+    {
+        CreateMap();
+    }
     ui->stackedWidget->setCurrentIndex(0);
 }
 
 void Widget::on_WaveProgressBar_btn_clicked()
 {
+    if(!_WaveProgressBar)
+    {
+        CreateWaveProgressBar();
+    }
     ui->stackedWidget->setCurrentIndex(1);
 }
 
 void Widget::on_pushButton_clicked()
 {
+    if(!_Thermometer)
+    {
+        CreateThermometer();
+    }
     ui->stackedWidget->setCurrentIndex(2);
 }
 
 
 void Widget::on_pushButton_2_clicked()
 {
+    if(!_curve)
+    {
+        CreateCurve();
+    }
     ui->stackedWidget->setCurrentWidget(ui->curve_page);
 }
 
@@ -102,5 +127,16 @@ void Widget::on_wendu_dashboard_btn_clicked()
         CreateDashboard();
 
     ui->stackedWidget->setCurrentWidget(ui->wndu_dashboard_page);
+}
+
+
+void Widget::on_QCustomPlot_btn_clicked()
+{
+    if(!_QCustomPlotCurve)
+    {
+        CreateQCustomPlotCurve();
+    }
+
+    ui->stackedWidget->setCurrentWidget(ui->QCustomPlot_page);
 }
 

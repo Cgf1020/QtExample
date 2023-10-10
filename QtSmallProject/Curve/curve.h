@@ -1,6 +1,21 @@
 #ifndef CURVE_H
 #define CURVE_H
 
+
+/*曲线坐标图
+ *1.动态更新曲线
+ *2.支持设置坐标轴刻度数量和范围
+ *3.支持滚轮缩放                      待开发
+ *4.支持鼠标悬停到线上显示坐标点             待开发
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+*/
+
 #include <QWidget>
 #include <QList>
 #include <QChart>
@@ -27,7 +42,7 @@ class Curve : public QWidget
     Q_OBJECT
 
 public:
-    explicit Curve(QString curveName = "", QWidget *parent = nullptr);
+    explicit Curve(QWidget *parent = nullptr);
     ~Curve();
 
 
@@ -45,6 +60,20 @@ public:
     */
     void updateSpline(QString name, double yValue);
 
+    /* 设置x轴
+     * @xScalesNum: 刻度数量
+     * @XScalesSpace: 刻度间隔   单位/s
+    */
+    void setXaxis(int xScalesNum, int XScalesSpace);
+
+    /* 设置y轴
+     * @
+    */
+    void setYaxis();
+
+    //设置滚轮缩放系数
+    void setScaleFactor(double scaleFactor) noexcept;
+
 
 protected:
     //鼠标滚轮事件
@@ -58,14 +87,12 @@ private slots:
 
     void TimeoutHandler();
 
-
-
-
 private:
-    Ui::Curve *ui;
-
     //这个曲线坐标的名称
     QString         _curveName{"曲线坐标图"};
+    int             _xScalesNum{ 6 };                   //x轴的刻度数量，默认为6个一个小时
+    int             _XScalesSpace{ 5 };                   //刻度间隔   单位/s
+    double          _scaleFactor{ 1 };                  //滚轮缩放系数
 
 
     //抽象意思应该是画布, 坐标 和 曲线在上面进行绘制
@@ -74,6 +101,10 @@ private:
 
 
     QList<QSplineSeries*>       _SplineList;            //保存曲线图表上的曲线对象
+
+private:
+    Ui::Curve *ui;
+
 };
 
 #endif // CURVE_H
