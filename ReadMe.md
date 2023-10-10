@@ -115,7 +115,9 @@
 
 > 1. QCustomPlot绘制的曲线图
 
-![image-20231010143612784](./ReadMe.assets/image-20231010143612784.png)
+
+
+![image-20231010182115247](./ReadMe.assets/image-20231010182115247.png)
 
 
 

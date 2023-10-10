@@ -1,6 +1,20 @@
 #ifndef QCUSTOMPLOTCURVE_H
 #define QCUSTOMPLOTCURVE_H
 
+
+
+
+
+
+/* QCustomPlot 学习
+ * QCPGraph 为折线图 https://blog.csdn.net/u010258235/article/details/108482979
+ * https://blog.csdn.net/qq_23208659/article/details/117031802
+ *
+*/
+
+
+
+
 #include <QWidget>
 #include "qcustomplot.h"
 
@@ -46,6 +60,8 @@ private:
     Ui::QCustomPlotCurve *ui;
 
     QCustomPlot*        _QCustomPlot;
+    QCPItemTracer*      _tracer;
+
     bool                _isEescaleAxes{true};     //是否调整范围自适应坐标轴， 滚轮事件、拖动事件的时候不调整
 };
 

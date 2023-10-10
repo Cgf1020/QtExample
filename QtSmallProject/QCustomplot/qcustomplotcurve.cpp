@@ -44,9 +44,52 @@ void QCustomPlotCurve::onQCustomPlotMouseWheel(QWheelEvent *event)
 void QCustomPlotCurve::onQCustomPlotMouseMove(QMouseEvent *event)
 {
     // 如果是鼠标左键按下
-    if(event->button() == Qt::LeftButton)
+    if(event->buttons() &  Qt::LeftButton)
     {
         _isEescaleAxes = false;
+    }
+    else
+    {
+        // 获取鼠标所在位置的像素坐标
+        QPoint pos = event->pos();
+        // 将像素坐标转换为画布坐标系下的值
+        double x = _QCustomPlot->xAxis->pixelToCoord(pos.x());
+        double y = _QCustomPlot->yAxis->pixelToCoord(pos.y());
+
+        //遍历曲线
+        for (int i = 0; i < _QCustomPlot->graphCount(); ++i)
+        {
+            //判断哪一条曲线被选中
+            if(_QCustomPlot->graph(i)->selected())
+            {
+                //显示锚点
+                _tracer->setVisible(true);
+                QCPGraph *graph = _QCustomPlot->graph(i);
+
+                _tracer->setGraph(graph);//将锚点设置到被选中的曲线上
+                _tracer->setGraphKey(x); //将游标横坐标设置成刚获得的横坐标数据x
+                _tracer->setInterpolating(true); //游标的纵坐标可以通过曲线数据线性插值自动获得
+                _tracer->updatePosition(); //使得刚设置游标的横纵坐标位置生效
+                double xValue = _tracer->position->key();
+                double yValue = _tracer->position->value();
+                //显示tip框
+
+
+                // 将数据点的值显示在QToolTip中
+                QString text = QString("%1 x:%2,  y:%3")
+                                   .arg(graph->name())
+                                   .arg(QString::number(xValue))
+                                   .arg(QString::number(yValue));
+                QToolTip::showText(event->globalPos(), text);
+                break;
+            }
+            else
+            {
+                //没有曲线被选中，不显示锚点
+                _tracer->setVisible(false);
+            }}
+        //重绘
+        _QCustomPlot->replot();
     }
 }
 
@@ -87,28 +130,55 @@ void QCustomPlotCurve::InitForm()
         //可以进行鼠标位置 放大缩小 拖拽 放大缩小坐标系
         _QCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes |
                                       QCP::iSelectLegend | QCP::iSelectPlottables);
+
+
+        //鼠标悬浮曲线显示坐标点
+        _tracer = new QCPItemTracer(_QCustomPlot);
+        _tracer->setStyle(QCPItemTracer::tsCircle);
+        _tracer->setPen(QPen(Qt::red));
+        _tracer->setBrush(Qt::red);
+        _tracer->setSize(6);
+
+        _QCustomPlot->setMouseTracking(true);
     }
 
-    //操作设置
+    //功能美化设置
     {
         //设置 Y轴范围 !!! 启动了 自适应功能的话 这设置不生效 rescaleAxes
-        _QCustomPlot->yAxis->setRange(-30,30);
+        _QCustomPlot->yAxis->setRange(-1,2);
 
         _QCustomPlot->xAxis->setLabel("时间");
         _QCustomPlot->yAxis->setLabel("电线温度");
+        _QCustomPlot->xAxis->setLabelColor(Qt::blue);
+        _QCustomPlot->yAxis->setLabelColor(Qt::blue);//设置左轴为蓝色
+
+        //设置轴的颜色
+        _QCustomPlot->xAxis->setBasePen(QPen(Qt::red));//设置下轴为红色
+        _QCustomPlot->yAxis->setBasePen(QPen(Qt::blue));//设置左轴为蓝色
+        _QCustomPlot->xAxis->setTickLabelColor(Qt::blue);    //设置刻度文字的颜色
+        _QCustomPlot->yAxis->setTickLabelColor(Qt::blue);    //设置刻度文字的颜色
+
+        //设置背景透明
+        _QCustomPlot->setBackground(Qt::transparent);
+        _QCustomPlot->axisRect()->setBackground(Qt::transparent);
+
+        //图例
+        _QCustomPlot->legend->setVisible(true);
     }
-
-
 
     connect(_QCustomPlot, &QCustomPlot::mouseWheel, this, &QCustomPlotCurve::onQCustomPlotMouseWheel);
     connect(_QCustomPlot, &QCustomPlot::mouseMove, this, &QCustomPlotCurve::onQCustomPlotMouseMove);
     connect(_QCustomPlot, &QCustomPlot::mousePress, this, &QCustomPlotCurve::onQCustomPlotMousePress);
 
 
-
     //画布上添加曲线
     QCPGraph* Graph = _QCustomPlot->addGraph();
     Graph->setName("daf");
+    _QCustomPlot->graph()->setLineStyle(QCPGraph::lsLine);
+
+    QCPGraph* Graph1 = _QCustomPlot->addGraph();
+    Graph1->setName("daf1");
+    _QCustomPlot->graph()->setLineStyle(QCPGraph::lsLine);
 
     QTimer* timerDrawLine = new QTimer();
     timerDrawLine->start(1000);
@@ -119,18 +189,31 @@ void QCustomPlotCurve::InitForm()
 
 void QCustomPlotCurve::TimeoutHandler()
 {
-    //获取曲线
-    QCPGraph* Graph = _QCustomPlot->graph();
-
-    //添加曲线坐标点
     QDateTime dateTime = QDateTime::currentDateTime();
     double  now = dateTime.toTime_t();//当前时间转化为秒
+
+    //获取曲线
+    int graphCount = _QCustomPlot->graphCount();
+    for(int i = 0; i < graphCount - 1; i++)
+    {
+        QCPGraph* Graph = _QCustomPlot->graph(i);
+
+        if(Graph)
+        {
+            //添加曲线坐标点
+            Graph->addData(now, 1.5);
+        }
+    }
+
+    QCPGraph* Graph = _QCustomPlot->graph();
+    //添加曲线坐标点
     Graph->addData(now, qSin(Graph->dataCount()/50.0)+qSin(Graph->dataCount()/50.0/0.3843)*0.25);
 
     if(_isEescaleAxes)
     {
-        _QCustomPlot->rescaleAxes(true);    //自适应坐标范围 x 和 y轴   曲线  ==》   xAxis->rescale() &&  Graph->rescaleValueAxis(false, true);
-        _QCustomPlot->xAxis->setRange(now - 1 * 5, now);
+        _QCustomPlot->xAxis->rescale();
+//        _QCustomPlot->rescaleAxes(true);    //自适应坐标范围 x 和 y轴   曲线  ==》   xAxis->rescale() &&  Graph->rescaleValueAxis(false, true);
+        _QCustomPlot->xAxis->setRange(now - 1 * 60 * 5, now);
     }
 
     //刷新函数
