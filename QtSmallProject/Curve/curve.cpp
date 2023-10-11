@@ -9,6 +9,8 @@
 #include <QTime>
 #include <QDateTime>
 #include <QDateTimeAxis>
+#include <QThread>
+
 
 Curve::Curve(QWidget *parent) :
     QWidget(parent),
@@ -29,8 +31,15 @@ Curve::Curve(QWidget *parent) :
 
     QTimer* timerDrawLine = new QTimer();
     timerDrawLine->start(2000);
-    connect(timerDrawLine,&QTimer::timeout,[=](){
+    connect(timerDrawLine,&QTimer::timeout, [=](){
         TimeoutHandler();
+    });
+
+
+    QTimer* timerDraw = new QTimer();
+    timerDraw->start(2000);
+    connect(timerDraw,&QTimer::timeout, [=](){
+        TimeoutHandler1();
     });
 }
 
@@ -199,6 +208,9 @@ void Curve::InitChartView()
 
 void Curve::TimeoutHandler()
 {
+    qDebug() << "TimeoutHandler Current Thread ID: " << QThread::currentThreadId();
+
+
     // 更新X轴的范围
     //获取当前时间
     QDateTime currentTime = QDateTime::currentDateTime();
@@ -226,6 +238,11 @@ void Curve::TimeoutHandler()
     int64_t range = (_xScalesNum - 1) * _XScalesSpace;
 
     chart->axes(Qt::Horizontal).at(0)->setRange(QDateTime::currentDateTime().addSecs(-1*range), QDateTime::currentDateTime());
+}
+
+void Curve::TimeoutHandler1()
+{
+    qDebug() << "TimeoutHandler1 Current Thread ID: " << QThread::currentThreadId();
 }
 
 

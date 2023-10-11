@@ -153,6 +153,9 @@ void QCustomPlotCurve::InitForm()
 
     //功能美化设置
     {
+
+
+
         //设置 Y轴范围 !!! 启动了 自适应功能的话 这设置不生效 rescaleAxes
         _QCustomPlot->yAxis->setRange(-1,2);
 
@@ -188,12 +191,14 @@ void QCustomPlotCurve::InitForm()
     //画布上添加曲线
     QCPGraph* Graph = _QCustomPlot->addGraph();
     Graph->setName("daf");
-    Graph->setPen(QPen(Qt::yellow));
+    Graph->setPen(QPen(Qt::red));
     _QCustomPlot->graph()->setLineStyle(QCPGraph::lsLine);
+    _QCustomPlot->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross));
 
     QCPGraph* Graph1 = _QCustomPlot->addGraph();
     Graph1->setName("daf1");
     _QCustomPlot->graph()->setLineStyle(QCPGraph::lsLine);
+    _QCustomPlot->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle));
 
     QTimer* timerDrawLine = new QTimer();
     timerDrawLine->start(1000);

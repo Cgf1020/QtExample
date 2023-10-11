@@ -87,6 +87,8 @@ private slots:
 
     void TimeoutHandler();
 
+    void TimeoutHandler1();
+
 private:
     //这个曲线坐标的名称
     QString         _curveName{"曲线坐标图"};
