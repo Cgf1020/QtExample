@@ -66,6 +66,7 @@ void QCustomPlotCurve::onQCustomPlotMouseMove(QMouseEvent *event)
                 _tracer->setVisible(true);
                 QCPGraph *graph = _QCustomPlot->graph(i);
 
+
                 _tracer->setGraph(graph);//将锚点设置到被选中的曲线上
                 _tracer->setGraphKey(x); //将游标横坐标设置成刚获得的横坐标数据x
                 _tracer->setInterpolating(true); //游标的纵坐标可以通过曲线数据线性插值自动获得
@@ -80,7 +81,7 @@ void QCustomPlotCurve::onQCustomPlotMouseMove(QMouseEvent *event)
                                    .arg(graph->name())
                                    .arg(QString::number(xValue))
                                    .arg(QString::number(yValue));
-                QToolTip::showText(event->globalPos(), text);
+                QToolTip::showText(event->globalPos(), text, _QCustomPlot);
                 break;
             }
             else
@@ -99,6 +100,7 @@ void QCustomPlotCurve::onQCustomPlotMousePress(QMouseEvent *event)
     if(event->button() == Qt::RightButton)
     {
         _isEescaleAxes = true;
+        _QCustomPlot->yAxis->setRange(-1,2);
         _QCustomPlot->replot();
     }
 }
@@ -112,11 +114,12 @@ void QCustomPlotCurve::InitForm()
         this->layout()->addWidget(_QCustomPlot);
 
         //添加标题
-        QCPTextElement *plotTitle = new QCPTextElement(_QCustomPlot);
-        plotTitle->setText("导线温度曲线");
-        plotTitle->setFont(QFont("宋体", 16, QFont::Bold));
-        _QCustomPlot->plotLayout()->insertRow(0);
-        _QCustomPlot->plotLayout()->addElement(0, 0, plotTitle);
+//        QCPTextElement *plotTitle = new QCPTextElement(_QCustomPlot);
+//        plotTitle->setText("导线温度曲线");
+//        plotTitle->setTextColor(Qt::red);
+//        plotTitle->setFont(QFont("宋体", 16, QFont::Bold));
+//        _QCustomPlot->plotLayout()->insertRow(0);
+//        _QCustomPlot->plotLayout()->addElement(0, 0, plotTitle);
 
 
         //设置使用时间刻度轴
@@ -126,6 +129,12 @@ void QCustomPlotCurve::InitForm()
         dateTimeTicker->setTickStepStrategy(QCPAxisTicker::tssMeetTickCount);
         _QCustomPlot->xAxis->setTicker(dateTimeTicker);
         _QCustomPlot->xAxis->setTickLabelRotation(30);//设置刻度标签顺时针旋转30度
+
+        //QCustomPlot中隐藏网格并仅显示零线
+        _QCustomPlot->xAxis->grid()->setVisible(false);     //设置 x轴网格 不显示
+        _QCustomPlot->yAxis->grid()->setPen(Qt::NoPen);
+        _QCustomPlot->yAxis->grid()->setSubGridPen(Qt::NoPen);
+
 
         //可以进行鼠标位置 放大缩小 拖拽 放大缩小坐标系
         _QCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes |
@@ -153,7 +162,7 @@ void QCustomPlotCurve::InitForm()
         _QCustomPlot->yAxis->setLabelColor(Qt::blue);//设置左轴为蓝色
 
         //设置轴的颜色
-        _QCustomPlot->xAxis->setBasePen(QPen(Qt::red));//设置下轴为红色
+        _QCustomPlot->xAxis->setBasePen(QPen(QColor(109, 112, 139)));//设置下轴为红色
         _QCustomPlot->yAxis->setBasePen(QPen(Qt::blue));//设置左轴为蓝色
         _QCustomPlot->xAxis->setTickLabelColor(Qt::blue);    //设置刻度文字的颜色
         _QCustomPlot->yAxis->setTickLabelColor(Qt::blue);    //设置刻度文字的颜色
@@ -164,6 +173,11 @@ void QCustomPlotCurve::InitForm()
 
         //图例
         _QCustomPlot->legend->setVisible(true);
+        _QCustomPlot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop|Qt::AlignHCenter);
+        _QCustomPlot->legend->setBorderPen(Qt::NoPen);
+        _QCustomPlot->legend->setBrush(QColor(255,255,255,0));//设置图例背景
+        _QCustomPlot->legend->setFont(QFont("Helvetica", 5));
+
     }
 
     connect(_QCustomPlot, &QCustomPlot::mouseWheel, this, &QCustomPlotCurve::onQCustomPlotMouseWheel);
@@ -174,6 +188,7 @@ void QCustomPlotCurve::InitForm()
     //画布上添加曲线
     QCPGraph* Graph = _QCustomPlot->addGraph();
     Graph->setName("daf");
+    Graph->setPen(QPen(Qt::yellow));
     _QCustomPlot->graph()->setLineStyle(QCPGraph::lsLine);
 
     QCPGraph* Graph1 = _QCustomPlot->addGraph();
