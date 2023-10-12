@@ -17,11 +17,34 @@ QCustomPlotCurve::~QCustomPlotCurve()
     delete ui;
 }
 
-void QCustomPlotCurve::addGraph(QString name)
+void QCustomPlotCurve::addGraph(QString name, QColor color)
 {
     //画布上添加曲线
     QCPGraph* Graph = _QCustomPlot->addGraph();
     Graph->setName(name);
+    Graph->setLineStyle(QCPGraph::lsLine);
+    Graph->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle));
+
+    QPen pen;
+    pen.setWidthF(1.5);
+
+    if(color.isValid())
+    {
+        pen.setColor(color);
+    }
+    else
+    {
+        //获取随机数
+        int n = QRandomGenerator::global()->bounded(20);
+        pen.setColor((Qt::GlobalColor)n);
+    }
+    Graph->setPen(pen);
+
+//    int GraphCount = _QCustomPlot->graphCount();
+//    _QCustomPlot->legend->addElement(0, GraphCount,  _QCustomPlot->legend->item(GraphCount));
+////    _QCustomPlot->legend->addElement(1,0,plot->legend->item(2));
+////    _QCustomPlot->legend->addElement(1,1,plot->legend->item(3));
+
 }
 
 void QCustomPlotCurve::setYaxisName(QString title)
@@ -33,12 +56,13 @@ void QCustomPlotCurve::onQCustomPlotMouseWheel(QWheelEvent *event)
 {
     _isEescaleAxes = false;
 
-    if (_QCustomPlot->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
-        _QCustomPlot->axisRect()->setRangeZoom(_QCustomPlot->xAxis->orientation());
-    else if (_QCustomPlot->yAxis->selectedParts().testFlag(QCPAxis::spAxis))
+//    if (_QCustomPlot->xAxis->selectedParts().testFlag(QCPAxis::spAxis))
+
+    if (_QCustomPlot->yAxis->selectedParts().testFlag(QCPAxis::spAxis))
         _QCustomPlot->axisRect()->setRangeZoom(_QCustomPlot->yAxis->orientation());
     else
-        _QCustomPlot->axisRect()->setRangeZoom(Qt::Horizontal | Qt::Vertical);
+        _QCustomPlot->axisRect()->setRangeZoom(_QCustomPlot->xAxis->orientation());
+//        _QCustomPlot->axisRect()->setRangeZoom(Qt::Horizontal | Qt::Vertical);
 }
 
 void QCustomPlotCurve::onQCustomPlotMouseMove(QMouseEvent *event)
@@ -65,7 +89,6 @@ void QCustomPlotCurve::onQCustomPlotMouseMove(QMouseEvent *event)
                 //显示锚点
                 _tracer->setVisible(true);
                 QCPGraph *graph = _QCustomPlot->graph(i);
-
 
                 _tracer->setGraph(graph);//将锚点设置到被选中的曲线上
                 _tracer->setGraphKey(x); //将游标横坐标设置成刚获得的横坐标数据x
@@ -114,27 +137,20 @@ void QCustomPlotCurve::InitForm()
         this->layout()->addWidget(_QCustomPlot);
 
         //添加标题
-//        QCPTextElement *plotTitle = new QCPTextElement(_QCustomPlot);
-//        plotTitle->setText("导线温度曲线");
-//        plotTitle->setTextColor(Qt::red);
-//        plotTitle->setFont(QFont("宋体", 16, QFont::Bold));
-//        _QCustomPlot->plotLayout()->insertRow(0);
-//        _QCustomPlot->plotLayout()->addElement(0, 0, plotTitle);
-
+        QCPTextElement *plotTitle = new QCPTextElement(_QCustomPlot);
+        plotTitle->setText("导线温度曲线");
+        plotTitle->setTextColor(Qt::red);
+        plotTitle->setFont(QFont("宋体", 16, QFont::Bold));
+        _QCustomPlot->plotLayout()->insertRow(0);
+        _QCustomPlot->plotLayout()->addElement(0, 0, plotTitle);
 
         //设置使用时间刻度轴
         QSharedPointer<QCPAxisTickerDateTime> dateTimeTicker(new QCPAxisTickerDateTime);
-        dateTimeTicker->setDateTimeFormat("yyyy-M-d h:m:s");      //设置x轴刻度显示格式
+        dateTimeTicker->setDateTimeFormat("h:m:s");      //设置x轴刻度显示格式 yyyy-M-d h:m:s
         dateTimeTicker->setTickCount(5);                        //时间轴 设置显示的刻度数量
         dateTimeTicker->setTickStepStrategy(QCPAxisTicker::tssMeetTickCount);
         _QCustomPlot->xAxis->setTicker(dateTimeTicker);
         _QCustomPlot->xAxis->setTickLabelRotation(30);//设置刻度标签顺时针旋转30度
-
-        //QCustomPlot中隐藏网格并仅显示零线
-        _QCustomPlot->xAxis->grid()->setVisible(false);     //设置 x轴网格 不显示
-        _QCustomPlot->yAxis->grid()->setPen(Qt::NoPen);
-        _QCustomPlot->yAxis->grid()->setSubGridPen(Qt::NoPen);
-
 
         //可以进行鼠标位置 放大缩小 拖拽 放大缩小坐标系
         _QCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes |
@@ -153,9 +169,6 @@ void QCustomPlotCurve::InitForm()
 
     //功能美化设置
     {
-
-
-
         //设置 Y轴范围 !!! 启动了 自适应功能的话 这设置不生效 rescaleAxes
         _QCustomPlot->yAxis->setRange(-1,2);
 
@@ -170,6 +183,16 @@ void QCustomPlotCurve::InitForm()
         _QCustomPlot->xAxis->setTickLabelColor(Qt::blue);    //设置刻度文字的颜色
         _QCustomPlot->yAxis->setTickLabelColor(Qt::blue);    //设置刻度文字的颜色
 
+
+        QPen pen;
+        pen.setColor(Qt::red);//主刻度红色
+        pen.setWidth(2);//线宽2
+        _QCustomPlot->xAxis->setTickPen(pen);
+        _QCustomPlot->xAxis->setSubTickPen(QPen(Qt::blue));     //子刻度蓝色
+//        _QCustomPlot->xAxis->setSubTickLengthIn(15);//子刻度向内延伸15
+//        _QCustomPlot->xAxis->setSubTickLengthOut(5);//子刻度向外延伸5
+
+
         //设置背景透明
         _QCustomPlot->setBackground(Qt::transparent);
         _QCustomPlot->axisRect()->setBackground(Qt::transparent);
@@ -180,29 +203,40 @@ void QCustomPlotCurve::InitForm()
         _QCustomPlot->legend->setBorderPen(Qt::NoPen);
         _QCustomPlot->legend->setBrush(QColor(255,255,255,0));//设置图例背景
         _QCustomPlot->legend->setFont(QFont("Helvetica", 5));
+        int count = _QCustomPlot->plotLayout()->rowCount();
+        // 设置图例行优先排列
+        _QCustomPlot->legend->setFillOrder(QCPLayoutGrid::foColumnsFirst);
+        // 设置六个图例自动换行
+        _QCustomPlot->legend->setWrap(3);
+        _QCustomPlot->legend->setMargins(QMargins(100,10,10,1));
+        _QCustomPlot->plotLayout()->addElement(count,0,_QCustomPlot->legend);
+        _QCustomPlot->plotLayout()->setRowStretchFactor(count, 0.001);
 
+
+
+        //QCustomPlot中隐藏网格并仅显示零线
+        _QCustomPlot->xAxis->grid()->setVisible(false);     //设置 x轴网格 不显示
+//        _QCustomPlot->yAxis->grid()->setPen(Qt::NoPen);
+
+        _QCustomPlot->yAxis->grid()->setPen(QPen(QColor(50, 50, 50), 1, Qt::PenStyle::SolidLine));//网格白色虚线
+        _QCustomPlot->yAxis->grid()->setZeroLinePen(QPen(QColor(50, 50, 50), 1, Qt::PenStyle::SolidLine));
+
+//            Graph->setLineStyle(QCPGraph::lsLine);
+//        Graph->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle));
     }
 
     connect(_QCustomPlot, &QCustomPlot::mouseWheel, this, &QCustomPlotCurve::onQCustomPlotMouseWheel);
     connect(_QCustomPlot, &QCustomPlot::mouseMove, this, &QCustomPlotCurve::onQCustomPlotMouseMove);
     connect(_QCustomPlot, &QCustomPlot::mousePress, this, &QCustomPlotCurve::onQCustomPlotMousePress);
 
-
     //画布上添加曲线
-    QCPGraph* Graph = _QCustomPlot->addGraph();
-    Graph->setName("daf");
-    Graph->setPen(QPen(Qt::red));
-    _QCustomPlot->graph()->setLineStyle(QCPGraph::lsLine);
-    _QCustomPlot->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross));
-
-    QCPGraph* Graph1 = _QCustomPlot->addGraph();
-    Graph1->setName("daf1");
-    _QCustomPlot->graph()->setLineStyle(QCPGraph::lsLine);
-    _QCustomPlot->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle));
+    addGraph("test1");
+    addGraph("test2");
+    addGraph("test3");
 
     QTimer* timerDrawLine = new QTimer();
     timerDrawLine->start(1000);
-    connect(timerDrawLine,&QTimer::timeout,[=](){
+    connect(timerDrawLine,&QTimer::timeout, this, [=](){
         TimeoutHandler();
     });
 }

@@ -12,6 +12,8 @@
 
 
 #include <QWidget>
+#include <QList>
+#include <QColor>
 #include "qcustomplot.h"
 
 namespace Ui {
@@ -28,7 +30,7 @@ public:
 
     /* 添加曲线
     */
-    void addGraph(QString name);
+    void addGraph(QString name, QColor color = QColor());
 
     /* 设置y轴的标题
     */

@@ -29,17 +29,18 @@ Curve::Curve(QWidget *parent) :
 
 
 
-    QTimer* timerDrawLine = new QTimer();
+    QTimer* timerDrawLine = new QTimer(this);
     timerDrawLine->start(2000);
-    connect(timerDrawLine,&QTimer::timeout, [=](){
+    connect(timerDrawLine,&QTimer::timeout, this, [=](){
         TimeoutHandler();
     });
 
 
-    QTimer* timerDraw = new QTimer();
+    QTimer* timerDraw = new QTimer(this);
     timerDraw->start(2000);
-    connect(timerDraw,&QTimer::timeout, [=](){
-        TimeoutHandler1();
+    connect(timerDraw,&QTimer::timeout, this, [=](){
+//        TimeoutHandler1();
+        qDebug() << " timerDraw:" << _XScalesSpace;
     });
 }
 
