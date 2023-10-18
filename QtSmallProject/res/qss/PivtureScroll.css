@@ -1,0 +1,68 @@
+
+#MyQWidget {
+    min-width: 80px;
+
+    /*1. 文本属性，指的是控件中文本（写的字）的属性*/
+    color: #3f1842;
+    /*文本的颜色*/
+    color: rgb(68, 68, 68);
+
+    /*2. 背景属性*/
+    background: none;
+    background-color:rgba(0,0,0,0);     /*透明属性*/
+    background-image: url(:/image/next_btn_3.png);
+    /*设置所有的背景属性*/
+
+    /*边框的设计*/
+    border-radius: 0px;
+    /*圆角外边框半径==》 border-top-left-radius（左上圆角半径）, border-top-right-radius（右上圆角半径）, border-bottom-right-radius （右下圆角半径）,border-bottom-left-radius（左下圆角半径）*/
+    border-style: none;
+    /*边框的样式*/
+
+
+    /*内边距属性*/
+    padding: 5px;
+    /*在一个设置中声明内边距属性*/
+
+
+    /*外边距属性:边缘*/
+    margin: 0px;
+}
+
+QWidget#PictureScroll
+{
+    background-color: #242b3b;
+    /* background-color: blue; */
+}
+
+
+QToolButton
+{
+    width: 130px;
+    background-color:transparent;
+    background-position: center;
+    background-repeat: no-repeat; 
+
+}
+
+QToolButton#pre_btn:hover{
+    background-image: url(:/image/pre_btn.png);
+}
+
+QToolButton#next_btn:hover{
+    background-image: url(:/image/next_btn.png);
+}
+
+/* QToolButton#pre_btn:pressed, QToolButton#next_btn:pressed{
+    background: rgb(241, 112, 122);
+} */
+
+
+
+QListWidget::item
+{
+    padding-top:10px; 
+    padding-bottom:10px; 
+    margin-left:25px; 
+    margin-right:25px
+}

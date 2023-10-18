@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/next_btn.png</file>
+        <file>image/pre_btn.png</file>
+        <file>qss/PivtureScroll.css</file>
+        <file>svg/busy-im.svg</file>
+        <file>svg/expand_down.svg</file>
+        <file>svg/expand_right.svg</file>
+        <file>svg/leave-im.svg</file>
+        <file>svg/online-im.svg</file>
+        <file>svg/portrait_boy.svg</file>
+        <file>svg/portrait_girl.svg</file>
+        <file>svg/video.svg</file>
+        <file>svg/video_hover.svg</file>
+    </qresource>
+</RCC>

@@ -14,7 +14,7 @@ Battery::Battery(QWidget *parent) :
 
     minValue = 0;
     maxValue = 100;
-    value = 50;
+    value = 80;
     alarmValue = 30;
 
     animation = true;
@@ -39,6 +39,7 @@ Battery::Battery(QWidget *parent) :
 
     timer = new QTimer(this);
     timer->setInterval(10);
+    timer->start();
     connect(timer, SIGNAL(timeout()), this, SLOT(updateValue()));
 }
 

@@ -31,12 +31,21 @@ include ($$PWD/Curve/Curve.pri)
 include ($$PWD/Battery/Battery.pri)
 #包含 仪表盘
 include ($$PWD/Dashboard/Dashboard.pri)
-
 #包含 QCustomplot
 include ($$PWD/QCustomplot/QCustomplot.pri)
-
+#包含 MultiLevelMenu 多级折叠下拉菜单
+include ($$PWD/MultiLevelMenu/MultiLevelMenu.pri)
+#包含 MVC的例子
+include ($$PWD/MVC/MVC.pri)
+#包含 图片滚动查看的例子
+include ($$PWD/PictureScroll/PictureScroll.pri)
+#包含 QQ好友列表
+include ($$PWD/QQFriendList/QQFriendList.pri)
 
 
 #设置使用utf8
 QMAKE_CFLAGS += /utf-8
 QMAKE_CXXFLAGS += /utf-8
+
+RESOURCES += \
+    res/res.qrc

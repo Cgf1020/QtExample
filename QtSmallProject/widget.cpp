@@ -8,6 +8,9 @@ Widget::Widget(QWidget *parent)
     ui->setupUi(this);
 
     this->Init();
+
+
+//    this->setStyleSheet("QWidget{background-color: #242b3b;}");
 }
 
 Widget::~Widget()
@@ -75,6 +78,25 @@ void Widget::CreateQCustomPlotCurve()
     ui->QCustomPlot_page->layout()->addWidget(_QCustomPlotCurve);
 }
 
+void Widget::CreateMultiLevelMenu()
+{
+    _MultiLevelMenu = new MultiLevelMenu(this);
+    ui->multilevelMenu_page->layout()->addWidget(_MultiLevelMenu);
+}
+
+void Widget::CreateMVC()
+{
+    _MVC = new MVC(this);
+    ui->MVC_page->layout()->addWidget(_MVC);
+}
+
+void Widget::CreatePictureScroll()
+{
+    _PictureScroll = new PictureScroll(this);
+
+    ui->PictureScroll_page->layout()->addWidget(_PictureScroll);
+}
+
 void Widget::on_map_btn_clicked()
 {
     if(!_Map)
@@ -138,5 +160,35 @@ void Widget::on_QCustomPlot_btn_clicked()
     }
 
     ui->stackedWidget->setCurrentWidget(ui->QCustomPlot_page);
+}
+
+
+void Widget::on_multilevelMenu_btn_clicked()
+{
+    if(!_MultiLevelMenu)
+    {
+        CreateMultiLevelMenu();
+    }
+    ui->stackedWidget->setCurrentWidget(ui->multilevelMenu_page);
+}
+
+
+void Widget::on_MVC_btn_clicked()
+{
+    if(!_MVC)
+    {
+        CreateMVC();
+    }
+    ui->stackedWidget->setCurrentWidget(ui->MVC_page);
+}
+
+
+void Widget::on_PictureScroll_btn_clicked()
+{
+    if(!_PictureScroll)
+    {
+        CreatePictureScroll();
+    }
+    ui->stackedWidget->setCurrentWidget(ui->PictureScroll_page);
 }
 

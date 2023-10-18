@@ -46,8 +46,6 @@ private slots:
     //QCustomPlot 鼠标点击事件
     void onQCustomPlotMousePress(QMouseEvent *event);
 
-
-
 private:
     void InitForm();
 

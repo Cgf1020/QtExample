@@ -9,8 +9,10 @@
 #include "Curve/curve.h"
 #include "Battery/battery.h"
 #include "Dashboard/dashboard.h"
-
 #include "QCustomplot/qcustomplotcurve.h"
+#include "MultiLevelMenu/multilevelmenu.h"
+#include "MVC/mvc.h"
+#include "PictureScroll/picturescroll.h"
 
 
 
@@ -43,6 +45,12 @@ private slots:
 
     void on_QCustomPlot_btn_clicked();
 
+    void on_multilevelMenu_btn_clicked();
+
+    void on_MVC_btn_clicked();
+
+    void on_PictureScroll_btn_clicked();
+
 private:
     void Init();
 
@@ -54,7 +62,10 @@ private:
     void CreateDashboard();
 
     void CreateQCustomPlotCurve();
+    void CreateMultiLevelMenu();
 
+    void CreateMVC();
+    void CreatePictureScroll();
 
 
 private:
@@ -66,9 +77,11 @@ private:
     Thermometer*        _Thermometer{NULL};
     Battery*            _Battery{NULL};             //电池
     Dashboard*          _Dashboard{NULL};           //温度仪表盘
+    QCustomPlotCurve*   _QCustomPlotCurve{NULL};    //曲线图
+    MultiLevelMenu*     _MultiLevelMenu{NULL};      //折叠下拉控件
 
-
-    QCustomPlotCurve*   _QCustomPlotCurve{NULL};
+    MVC*                _MVC{NULL};                       //MVC
+    PictureScroll*      _PictureScroll{NULL};             //滚轮图片查看
 };
 
 
