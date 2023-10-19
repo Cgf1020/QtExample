@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-
-#include "mvc_1_listmodel.h"
+#include "View/listview.h"
+#include "View/tableview.h"
 
 namespace Ui {
 class MVC;
@@ -26,9 +26,9 @@ private:
 private:
     Ui::MVC *ui;
 
-    /*使用QListView 和 QStringListModel 来实现的 增删改查功能
-    */
-    MVC_1_ListModel*        _MVC_1_ListModel;
+
+    TESTMVC::ListView*  listView_{NULL};
+    TableView* tableView_{NULL};
 };
 
 #endif // MVC_H

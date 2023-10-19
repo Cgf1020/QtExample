@@ -6,8 +6,8 @@
 #include <QStringListModel>
 #include <QStandardItemModel>
 
-#include "customlistmodel.h"
-#include "customitemdelegate.h"
+#include "../Model/customlistmodel.h"
+#include "../Delegate/customitemdelegate.h"
 
 namespace Ui {
 class MVC_1_ListModel;

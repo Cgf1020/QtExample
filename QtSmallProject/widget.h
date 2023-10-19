@@ -6,13 +6,13 @@
 #include "Map/map.h"
 #include "WaveProgressBar/waveprogressbar.h"
 #include "Thermometer/thermometer.h"
-#include "Curve/curve.h"
 #include "Battery/battery.h"
 #include "Dashboard/dashboard.h"
 #include "QCustomplot/qcustomplotcurve.h"
 #include "MultiLevelMenu/multilevelmenu.h"
 #include "MVC/mvc.h"
 #include "PictureScroll/picturescroll.h"
+#include "QCharts/curve.h"
 
 
 

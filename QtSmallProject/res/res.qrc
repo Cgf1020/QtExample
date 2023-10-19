@@ -12,5 +12,11 @@
         <file>svg/portrait_girl.svg</file>
         <file>svg/video.svg</file>
         <file>svg/video_hover.svg</file>
+        <file>image/expand.png</file>
+        <file>image/fold.png</file>
+        <file>image/item_right.png</file>
+        <file>image/expand_black.png</file>
+        <file>image/fold_black.png</file>
+        <file>image/item_right_balck.png</file>
     </qresource>
 </RCC>

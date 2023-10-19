@@ -19,14 +19,17 @@ FORMS += \
     widget.ui
 
 
+#使用QChart 绘制的图表
+include ($$PWD/QCharts/QCharts.pri)
+
+
+
 #包含 地图控件
 include ($$PWD/Map/Map.pri)
 #包含 水波图控件
 include ($$PWD/WaveProgressBar/WaveProgressBar.pri)
 #包含 温度计控件
 include ($$PWD/Thermometer/Thermometer.pri)
-#包含 曲线图
-include ($$PWD/Curve/Curve.pri)
 #包含 电池图
 include ($$PWD/Battery/Battery.pri)
 #包含 仪表盘

@@ -17,10 +17,16 @@ MVC::~MVC()
 
 void MVC::Init()
 {
-    //1.
-    _MVC_1_ListModel = new MVC_1_ListModel(this);
-    ui->tabWidget->addTab(_MVC_1_ListModel, "_MVC_1_ListModel");
+    listView_ = new TESTMVC::ListView(this);
+
+    for(int i = 0; i < 5; i++)
+        listView_->AddGroup("分组");
+
+
+    tableView_ = new TableView(this);
 
 
 
+    this->layout()->addWidget(tableView_);
+    this->layout()->addWidget(listView_);
 }
