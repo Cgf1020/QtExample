@@ -1,6 +1,8 @@
 #include "widget.h"
 #include "ui_widget.h"
 
+#include <QDebug>
+
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
@@ -9,8 +11,7 @@ Widget::Widget(QWidget *parent)
 
     this->Init();
 
-
-//    this->setStyleSheet("QWidget{background-color: #242b3b;}");
+    InitConnect();
 }
 
 Widget::~Widget()
@@ -18,177 +19,105 @@ Widget::~Widget()
     delete ui;
 }
 
+void Widget::buttonClickedSlots()
+{
+    QObject* obj = sender();
+
+    if(obj == ui->CustomPlot_btn)
+    {
+        //1. 判断是不是当前的MVC页面
+        if(ui->CustomPlot_btn->text() == ui->stackedWidget->currentWidget()->objectName())
+        {
+            return ;
+        }
+
+        //2. 判断存在当前页面不
+        if(int Index = this->findWidgetIndex(ui->CustomPlot_btn->text()); Index != -1)
+        {
+            ui->stackedWidget->setCurrentIndex(Index);
+            return;
+        }
+
+        //3. 插入一个页面
+        ui->stackedWidget->addWidget(_QCustomPlotCurve);
+        _MVC->setObjectName(ui->CustomPlot_btn->text());
+        ui->stackedWidget->setCurrentWidget(_QCustomPlotCurve);
+    }
+    else if(obj == ui->MVC_btn)
+    {
+        //1. 判断是不是当前的MVC页面
+        if(ui->MVC_btn->text() == ui->stackedWidget->currentWidget()->objectName())
+        {
+            return ;
+        }
+
+        //2. 判断存在当前页面不
+        if(int Index = this->findWidgetIndex(ui->MVC_btn->text()); Index != -1)
+        {
+            ui->stackedWidget->setCurrentIndex(Index);
+            return;
+        }
+
+        //3. 插入一个页面
+        ui->stackedWidget->addWidget(_MVC);
+        _MVC->setObjectName(ui->MVC_btn->text());
+        ui->stackedWidget->setCurrentWidget(_MVC);
+    }
+}
+
 void Widget::Init()
 {
-//    CreateMap();
-
-//    CreateWaveProgressBar();
-
-//    CreateThermometer();
-
-//    CreateCurve();
-}
-
-void Widget::CreateCurve()
-{
-    _curve = new Curve(this);
-
-    _curve->addSpline("随机测试曲线");
-
-
-    ui->curve_page->layout()->addWidget(_curve);
-}
-
-void Widget::CreateMap()
-{
-    _Map = new Map(this);
-
-    ui->map_page->layout()->addWidget(_Map);
-}
-
-void Widget::CreateWaveProgressBar()
-{
-    _WaveProgressBar = new WaveProgressBar(this);
-
-    ui->WaveProgressBar_page->layout()->addWidget(_WaveProgressBar);
-}
-
-void Widget::CreateThermometer()
-{
-    _Thermometer = new Thermometer(this);
-    _Thermometer->setValue(25.5);
-    ui->thermometer_page->layout()->addWidget(_Thermometer);
-}
-
-void Widget::CreateBattery()
-{
-    _Battery = new Battery(this);
-    ui->Battery_page->layout()->addWidget(_Battery);
-}
-
-void Widget::CreateDashboard()
-{
-    _Dashboard = new Dashboard("温度仪表盘", this);
-    ui->wndu_dashboard_page->layout()->addWidget(_Dashboard);
-}
-
-void Widget::CreateQCustomPlotCurve()
-{
-    _QCustomPlotCurve = new QCustomPlotCurve(this);
-    ui->QCustomPlot_page->layout()->addWidget(_QCustomPlotCurve);
-}
-
-void Widget::CreateMultiLevelMenu()
-{
-    _MultiLevelMenu = new MultiLevelMenu(this);
-    ui->multilevelMenu_page->layout()->addWidget(_MultiLevelMenu);
-}
-
-void Widget::CreateMVC()
-{
-    _MVC = new MVC(this);
-    ui->MVC_page->layout()->addWidget(_MVC);
-}
-
-void Widget::CreatePictureScroll()
-{
-    _PictureScroll = new PictureScroll(this);
-
-    ui->PictureScroll_page->layout()->addWidget(_PictureScroll);
-}
-
-void Widget::on_map_btn_clicked()
-{
-    if(!_Map)
     {
-        CreateMap();
-    }
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-void Widget::on_WaveProgressBar_btn_clicked()
-{
-    if(!_WaveProgressBar)
-    {
-        CreateWaveProgressBar();
-    }
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-void Widget::on_pushButton_clicked()
-{
-    if(!_Thermometer)
-    {
-        CreateThermometer();
-    }
-    ui->stackedWidget->setCurrentIndex(2);
-}
-
-
-void Widget::on_pushButton_2_clicked()
-{
-    if(!_curve)
-    {
-        CreateCurve();
-    }
-    ui->stackedWidget->setCurrentWidget(ui->curve_page);
-}
-
-
-void Widget::on_Battery_btn_clicked()
-{
-    if(!_Battery)
-        CreateBattery();
-
-    ui->stackedWidget->setCurrentWidget(ui->Battery_page);
-}
-
-void Widget::on_wendu_dashboard_btn_clicked()
-{
-    if(!_Dashboard)
-        CreateDashboard();
-
-    ui->stackedWidget->setCurrentWidget(ui->wndu_dashboard_page);
-}
-
-
-void Widget::on_QCustomPlot_btn_clicked()
-{
-    if(!_QCustomPlotCurve)
-    {
-        CreateQCustomPlotCurve();
+        _QCustomPlotCurve = new QCustomPlotCurve(this);
+        _QCustomPlotCurve->hide();
     }
 
-    ui->stackedWidget->setCurrentWidget(ui->QCustomPlot_page);
-}
-
-
-void Widget::on_multilevelMenu_btn_clicked()
-{
-    if(!_MultiLevelMenu)
     {
-        CreateMultiLevelMenu();
+        _MVC = new MVC(this);
+        _MVC->hide();
     }
-    ui->stackedWidget->setCurrentWidget(ui->multilevelMenu_page);
+
 }
 
-
-void Widget::on_MVC_btn_clicked()
+void Widget::InitConnect()
 {
-    if(!_MVC)
-    {
-        CreateMVC();
-    }
-    ui->stackedWidget->setCurrentWidget(ui->MVC_page);
+    //初始化 CustomPlot按钮链接
+    connect(ui->CustomPlot_btn, &QPushButton::pressed, this, &Widget::buttonClickedSlots);
+
+    connect(ui->MVC_btn, &QPushButton::pressed, this, &Widget::buttonClickedSlots);
 }
 
-
-void Widget::on_PictureScroll_btn_clicked()
+int Widget::findWidgetIndex(QString name)
 {
-    if(!_PictureScroll)
+    int widgetIndex = -1;
+
+    for(int i = 0; i < ui->stackedWidget->count(); i++)
     {
-        CreatePictureScroll();
+        if(ui->stackedWidget->widget(i)->objectName() == name)
+        {
+            widgetIndex = i;
+        }
     }
-    ui->stackedWidget->setCurrentWidget(ui->PictureScroll_page);
+
+    return widgetIndex;
 }
+
+
+
+//void Widget::CreateMVC()
+//{
+//    _MVC = new MVC(this);
+//    ui->MVC_page->layout()->addWidget(_MVC);
+//}
+
+
+
+//void Widget::on_MVC_btn_clicked()
+//{
+//    if(!_MVC)
+//    {
+//        CreateMVC();
+//    }
+//    ui->stackedWidget->setCurrentWidget(ui->MVC_page);
+//}
 

@@ -5,6 +5,7 @@
 
 #include "View/listview.h"
 #include "View/tableview.h"
+#include "QQFriendList/friendtree.h"
 
 namespace Ui {
 class MVC;
@@ -22,12 +23,20 @@ public:
 private:
     void Init();
 
+    void InitConnect();
+
+
+    void onButtonClick(bool checked);
+
+    int findTabIndex(QString name);
 
 private:
     Ui::MVC *ui;
 
-
     TESTMVC::ListView*  listView_{NULL};
+
+    qqfriendlist::FriendTree*         FriendTree_{NULL};
+
     TableView* tableView_{NULL};
 };
 

@@ -64,7 +64,6 @@ void ListView::Init()
         //判断是不是 group
         if(index.data(static_cast<int>(ListItemRole::IsGroupRole)).toBool())
         {
-            qDebug() << "clicked " << index.row();
             //更新值
             QVariant var = index.data(static_cast<int>(ListItemRole::GroupRole));
             ListGroupData groupData = var.value<ListGroupData>();
@@ -72,27 +71,16 @@ void ListView::Init()
             var.setValue<ListGroupData>(groupData);
             model_->setData(index, var, static_cast<int>(ListItemRole::GroupRole));
 
-            int count = index.row() + 1;
             if(groupData.isExpande)
             {
                 foreach (auto item, itemMap_[model_->itemFromIndex(index)]) {
-
                     this->setRowHidden(model_->indexFromItem(item).row(), false);
-
-//                    qDebug() << "item insertRow start ";
-//                    if(!item)
-//                        qDebug() << "item is null";
-//                    model_->insertRow(count++, item);
-//                    qDebug() << "item insertRow end";
                 }
             }
             else
             {
                 foreach (auto item, itemMap_[model_->itemFromIndex(index)]) {
-
                     this->setRowHidden(model_->indexFromItem(item).row(), true);
-
-//                    model_->removeRow(model_->indexFromItem(item).row());
                 }
             }
         }

@@ -24,3 +24,14 @@ SOURCES += \
     $$PWD/View/tableview.cpp \
     $$PWD/mvc.cpp \
 
+
+#包含 MVC的例子
+include ($$PWD/MultiLevelMenu/MultiLevelMenu.pri)
+
+#包含 图片滚动 缩略图
+include ($$PWD/PictureScroll/PictureScroll.pri)
+
+#包含 QQ列表
+include ($$PWD/QQFriendList/QQFriendList.pri)
+
+

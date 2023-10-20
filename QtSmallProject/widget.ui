@@ -14,6 +14,9 @@
    <string>Widget</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="spacing">
+    <number>6</number>
+   </property>
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -23,64 +26,9 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QPushButton" name="map_btn">
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>0</height>
-           </size>
-          </property>
+         <widget class="QPushButton" name="CustomPlot_btn">
           <property name="text">
-           <string>地图</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="WaveProgressBar_btn">
-          <property name="text">
-           <string>水波进度条</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>温度计</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>曲线图</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="Battery_btn">
-          <property name="text">
-           <string>电池</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="wendu_dashboard_btn">
-          <property name="text">
-           <string>温度仪表盘</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="QCustomPlot_btn">
-          <property name="text">
-           <string>QCustomPlot</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="multilevelMenu_btn">
-          <property name="text">
-           <string>折叠下拉</string>
+           <string>CustomPlot</string>
           </property>
          </widget>
         </item>
@@ -88,13 +36,6 @@
          <widget class="QPushButton" name="MVC_btn">
           <property name="text">
            <string>MVC</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="PictureScroll_btn">
-          <property name="text">
-           <string>图片滚动查看</string>
           </property>
          </widget>
         </item>
@@ -114,41 +55,13 @@
        </layout>
       </widget>
      </item>
-     <item>
-      <widget class="QStackedWidget" name="stackedWidget">
-       <widget class="QWidget" name="map_page">
-        <layout class="QGridLayout" name="gridLayout_3"/>
-       </widget>
-       <widget class="QWidget" name="WaveProgressBar_page">
-        <layout class="QGridLayout" name="gridLayout_2"/>
-       </widget>
-       <widget class="QWidget" name="thermometer_page">
-        <layout class="QGridLayout" name="gridLayout_4"/>
-       </widget>
-       <widget class="QWidget" name="curve_page">
-        <layout class="QGridLayout" name="gridLayout_5"/>
-       </widget>
-       <widget class="QWidget" name="Battery_page">
-        <layout class="QGridLayout" name="gridLayout_6"/>
-       </widget>
-       <widget class="QWidget" name="wndu_dashboard_page">
-        <layout class="QGridLayout" name="gridLayout_7"/>
-       </widget>
-       <widget class="QWidget" name="QCustomPlot_page">
-        <layout class="QGridLayout" name="gridLayout_8"/>
-       </widget>
-       <widget class="QWidget" name="multilevelMenu_page">
-        <layout class="QGridLayout" name="gridLayout_9"/>
-       </widget>
-       <widget class="QWidget" name="MVC_page">
-        <layout class="QGridLayout" name="gridLayout_10"/>
-       </widget>
-       <widget class="QWidget" name="PictureScroll_page">
-        <layout class="QGridLayout" name="gridLayout_11"/>
-       </widget>
-      </widget>
-     </item>
     </layout>
+   </item>
+   <item row="0" column="1">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QWidget" name="page_3"/>
+     <widget class="QWidget" name="page_4"/>
+    </widget>
    </item>
   </layout>
  </widget>

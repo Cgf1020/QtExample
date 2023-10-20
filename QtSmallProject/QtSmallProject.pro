@@ -19,31 +19,19 @@ FORMS += \
     widget.ui
 
 
+
+#一些不知道怎么分类的控件
+include ($$PWD/Control/Control.pri)
+
 #使用QChart 绘制的图表
 include ($$PWD/QCharts/QCharts.pri)
 
-
-
-#包含 地图控件
-include ($$PWD/Map/Map.pri)
-#包含 水波图控件
-include ($$PWD/WaveProgressBar/WaveProgressBar.pri)
-#包含 温度计控件
-include ($$PWD/Thermometer/Thermometer.pri)
-#包含 电池图
-include ($$PWD/Battery/Battery.pri)
-#包含 仪表盘
-include ($$PWD/Dashboard/Dashboard.pri)
-#包含 QCustomplot
+#包含 QCustomplot 图表
 include ($$PWD/QCustomplot/QCustomplot.pri)
-#包含 MultiLevelMenu 多级折叠下拉菜单
-include ($$PWD/MultiLevelMenu/MultiLevelMenu.pri)
+
 #包含 MVC的例子
 include ($$PWD/MVC/MVC.pri)
-#包含 图片滚动查看的例子
-include ($$PWD/PictureScroll/PictureScroll.pri)
-#包含 QQ好友列表
-include ($$PWD/QQFriendList/QQFriendList.pri)
+
 
 
 #设置使用utf8
