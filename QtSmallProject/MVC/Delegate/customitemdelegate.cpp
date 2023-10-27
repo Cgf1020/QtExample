@@ -21,6 +21,16 @@ void CustomItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         QVariant var = index.data(Qt::UserRole+1);
         CustomItemData itemData = var.value<CustomItemData>();
     }
+
+
+    //    QStyleOptionViewItem new_option(option);
+    //    new_option.displayAlignment = Qt::AlignCenter;        // 居中显示
+
+    //    if (new_option.state & QStyle::State_Selected) {
+    //        new_option.font.setBold(true);                    // 变为粗体
+    //    }
+    //    QStyledItemDelegate::paint(painter, new_option, index);
+
     painter->restore();
 }
 

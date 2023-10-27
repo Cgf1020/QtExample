@@ -14,7 +14,6 @@ namespace TESTMVC {
 
 
 
-
 class ListView : public QListView
 {
     Q_OBJECT

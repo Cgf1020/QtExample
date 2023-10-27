@@ -13,3 +13,8 @@ include ($$PWD/Thermometer/Thermometer.pri)
 
 #包含 水波进度条
 include ($$PWD/WaveProgressBar/WaveProgressBar.pri)
+
+#包含 水波进度条
+include ($$PWD/ImageDialog/ImageDialog.pri)
+
+

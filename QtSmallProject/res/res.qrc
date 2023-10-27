@@ -18,5 +18,20 @@
         <file>image/expand_black.png</file>
         <file>image/fold_black.png</file>
         <file>image/item_right_balck.png</file>
+        <file>image/delete.png</file>
+        <file>image/playback_btn.png</file>
+        <file>pic/1.jpg</file>
+        <file>pic/2.jpg</file>
+        <file>pic/3.png</file>
+        <file>pic/4.jpg</file>
+        <file>pic/5.png</file>
+        <file>pic/6.jpeg</file>
+        <file>pic/7.png</file>
+        <file>pic/8.png</file>
+        <file>pic/9.png</file>
+        <file>pic/10.png</file>
+        <file>pic/11.png</file>
+        <file>image/down_arrow.png</file>
+        <file>image/up-arrow.png</file>
     </qresource>
 </RCC>
